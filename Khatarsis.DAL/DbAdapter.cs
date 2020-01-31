@@ -13,36 +13,65 @@ namespace Khatarsis.DAL
         private const string connString = "SERVER = remotemysql.com" + ";USERID= IalS35jGSf" + ";PASSWORD= lHxoGp4AQC" +
                                   ";DATABASE= IalS35jGSf" + ";Connection Timeout=3;";
 
-        //create new record in mysql database to reserve id
-        private void InsertNewBlankRma()
+
+
+        //create new record in Rma Table and return its id. If return -1 that mean error
+        public int CreateNewRmaRecord()
         {
-
             var con = new MySqlConnection(connString);
-
             var cmd = new MySqlCommand();
             cmd.Connection = con;
-
-            cmd.CommandText = "INSERT INTO rma (id) VALUES (NULL)";
-
+            cmd.CommandText = "INSERT INTO rma (id) VALUES (NULL);";
+            int rmaId = 0;
             try
             {
-            con.Open();
-            cmd.ExecuteNonQuery();
+                //create record
+                con.Open();
+                cmd.ExecuteNonQuery();
+                cmd.CommandText = "select last_insert_id();";
+                var rdr = cmd.ExecuteReader();
+
+                // get id
+                while(rdr.Read())
+                    rmaId = rdr.GetInt32(0);
             }
             catch (Exception e)
             {
-                MessageBox.Show("InsertNewBlankRma Error\n\n"+e.Message);
+                MessageBox.Show("CreateNewRmaRecord Error\n\n"+e.Message);
+                rmaId = -1;
             }
             finally { con.Close(); }
+            
+            return rmaId;
         }
 
-        //returns last RMA id
-        private void SelectLastRmaId()
+        //return last id from RMA Table
+        public int GetLastId()
         {
+            int lastId = 0;
+            var con = new MySqlConnection(connString);
+            var cmd = new MySqlCommand();
+            cmd.Connection = con;
+            cmd.CommandText = "SELECT id FROM rma ORDER BY id DESC LIMIT 1";
+            try
+            {
+                con.Open();
+                var rdr = cmd.ExecuteReader();
 
+                while(rdr.Read())
+                lastId = rdr.GetInt32(0);
+            }
+            catch (Exception e)
+            {
+                
+                MessageBox.Show("GetLastId Error\n\n"+e.Message);
+                lastId=-1;
+            }
+            finally { con.Close(); }
+
+
+            return lastId;
         }
-
-
 
     }
 }

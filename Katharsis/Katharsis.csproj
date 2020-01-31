@@ -108,5 +108,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Khatarsis.DAL\Katharsis.DAL.csproj">
+      <Project>{483e0ad7-3dd0-4884-b96e-26099d944869}</Project>
+      <Name>Katharsis.DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
