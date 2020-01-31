@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29306.81
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Katharsis", "Katharsis\Katharsis.csproj", "{4D1F23D6-9281-4A83-A2E0-190F85A043D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Khatarsis.DAL", "Khatarsis.DAL\Khatarsis.DAL.csproj", "{483E0AD7-3DD0-4884-B96E-26099D944869}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4D1F23D6-9281-4A83-A2E0-190F85A043D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D1F23D6-9281-4A83-A2E0-190F85A043D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D1F23D6-9281-4A83-A2E0-190F85A043D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D1F23D6-9281-4A83-A2E0-190F85A043D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{483E0AD7-3DD0-4884-B96E-26099D944869}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{483E0AD7-3DD0-4884-B96E-26099D944869}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{483E0AD7-3DD0-4884-B96E-26099D944869}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{483E0AD7-3DD0-4884-B96E-26099D944869}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4A295BF9-A171-480B-81F0-2257F0D73D6F}
+	EndGlobalSection
+EndGlobal
