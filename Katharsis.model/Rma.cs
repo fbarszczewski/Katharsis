@@ -10,14 +10,27 @@ namespace Katharsis.model
     {
 
         public int Id { get; set; }
+
         public string StartDate { get; set; }
+
         public string UpdateDate { get; set; }
+
         public string Description { get; set; }
+
         public string Reason { get; set; }
+
         public string So { get; set; }
+
         public string InvoiceDate { get; set; }
-        public Client Client { get; set; }
+
+        public string Company { get; set; }
+
+        public string Phone { get; set; }
+
+        public string Mail { get; set; }
+
         public List<Product> Products { get; set; }
+
         public string Status { get; set; }
 
     }

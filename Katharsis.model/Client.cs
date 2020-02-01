@@ -10,7 +10,6 @@ namespace Katharsis.model
     {
         public int Id { get; set; }
         public string Comapny { get; set; }
-        public string Name { get; set; }
         public string Phone { get; set; }
         public string Mail { get; set; }
 
