@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{483E0AD7-3DD0-4884-B96E-26099D944869}</ProjectGuid>
+    <ProjectGuid>{5FF549BE-E038-4D00-811B-35514225DE31}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Khatarsis.DAL</RootNamespace>
-    <AssemblyName>Khatarsis.DAL</AssemblyName>
+    <RootNamespace>Katharsis.model</RootNamespace>
+    <AssemblyName>Katharsis.model</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -31,8 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MySql.Data, Version=8.0.17.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
-    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,14 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DbAdapter.cs" />
+    <Compile Include="Client.cs" />
+    <Compile Include="Product.cs" />
+    <Compile Include="Rma.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Katharsis.model\Katharsis.model.csproj">
-      <Project>{5ff549be-e038-4d00-811b-35514225de31}</Project>
-      <Name>Katharsis.model</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

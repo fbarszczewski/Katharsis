@@ -56,6 +56,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Katharsis.model\Katharsis.model.csproj">
+      <Project>{5ff549be-e038-4d00-811b-35514225de31}</Project>
+      <Name>Katharsis.model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Katharsis\Katharsis.csproj">
       <Project>{4d1f23d6-9281-4a83-a2e0-190f85a043d4}</Project>
       <Name>Katharsis</Name>

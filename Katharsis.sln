@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Katharsis.DAL", "Khatarsis.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Katharsis.Tests", "Katharsis.Tests\Katharsis.Tests.csproj", "{E4F8620F-FE36-49C5-8F06-4D1DD6C0E403}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Katharsis.model", "Katharsis.model\Katharsis.model.csproj", "{5FF549BE-E038-4D00-811B-35514225DE31}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{E4F8620F-FE36-49C5-8F06-4D1DD6C0E403}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4F8620F-FE36-49C5-8F06-4D1DD6C0E403}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4F8620F-FE36-49C5-8F06-4D1DD6C0E403}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FF549BE-E038-4D00-811B-35514225DE31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FF549BE-E038-4D00-811B-35514225DE31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FF549BE-E038-4D00-811B-35514225DE31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FF549BE-E038-4D00-811B-35514225DE31}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
