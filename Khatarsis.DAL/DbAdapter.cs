@@ -130,43 +130,11 @@ namespace Khatarsis.DAL
             return returnedRma;
         }
 
-        public void WriteProduct(List<Product> products)
-        {
-            _connection = new MySqlConnection(_connectionString);
-            _command = new MySqlCommand();
-            _command.Connection = _connection;
-            _command.CommandText = "INSERT INTO product (model,serial,description,status,rma_id) " +
-                              "VALUES (@model,@serial,@description,@status,@rma_id);";
-            try
-            {
-                //create record
-                
-                foreach (Product product in products)
-                {
 
-                    _command.Parameters.AddWithValue("@model",product.Model);
-                    _command.Parameters.AddWithValue("@serial",product.Serial);
-                    _command.Parameters.AddWithValue("@description",product.Description);
-                    _command.Parameters.AddWithValue("@status",product.Status);
-                    _command.Parameters.AddWithValue("@rma_id",product.Rma_Id);
-
-                    _connection.Open();
-                    _command.Prepare();
-                    _command.ExecuteNonQuery();
-                }
-
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("AddProduct Error\n\n"+e.Message);
-            }
-            finally 
-            { 
-                _connection.Close(); 
-            }
-            
-        }
-
+        /// <summary>
+        /// Create new product record in database.
+        /// </summary>
+        /// <param name="product"></param>
         public void WriteProduct(Product product)
         {
             _connection = new MySqlConnection(_connectionString);
@@ -198,6 +166,11 @@ namespace Khatarsis.DAL
             
         }
 
+        /// <summary>
+        /// Retrieve all products with specific rma ID
+        /// </summary>
+        /// <param name="rma_id"></param>
+        /// <returns></returns>
         public List<Product> ReadProducts(int rma_id)
         {
             
@@ -238,9 +211,37 @@ namespace Khatarsis.DAL
 
         
 
-        public void EditProduct()
+        public void EditProduct(Product product)
         {
+            //model,serial,description,status,rma_id 
+            _connection = new MySqlConnection(_connectionString);
+            _command = new MySqlCommand();
+            _command.Connection = _connection;
+            _command.CommandText = "UPDATE product SET " +
+                "model = @model, " +
+                "serial = @serial, " +
+                "description = @description, " +
+                "status = @status, " +
+                "rma_id = @rma_id " +
+                $"WHERE id = '{product.Id}';";
 
+            _command.Parameters.AddWithValue("@model",product.Model);
+            _command.Parameters.AddWithValue("@serial",product.Serial);
+            _command.Parameters.AddWithValue("@description",product.Description);
+            _command.Parameters.AddWithValue("@status",product.Status);
+            _command.Parameters.AddWithValue("@rma_id",product.Rma_Id);
+            
+            try
+            {
+               _connection.Open();
+               _command.Prepare();
+               _command.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("EditProduct Error\n\n"+e.Message);
+            }
+            finally { _connection.Close(); }
         }
 
 

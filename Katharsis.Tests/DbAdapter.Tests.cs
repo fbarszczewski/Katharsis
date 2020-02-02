@@ -11,7 +11,7 @@ namespace Katharsis.Tests
     {
         DbAdapter adapter =new DbAdapter();
         [TestMethod]
-        public void AddNewBalnkRmaAndFillItWithBasicData()
+        public void AddRmaFillWithValuesAndCheckValues()
         {
             //Arrange
             
@@ -44,7 +44,7 @@ namespace Katharsis.Tests
         }
 
         [TestMethod]
-        public void AddNewClient()
+        public void AddNewClientAndCheckValues()
         {
             //Arrange
             Client inputClient=new Client();
@@ -118,6 +118,27 @@ namespace Katharsis.Tests
             Assert.AreEqual(outputProducts[1].Rma_Id, products[1].Rma_Id, "Rma_Id");
         }
 
+
+        [TestMethod]
+        public void EditProductAndCheckValues()
+        {
+            //act
+            int random=new Random().Next(0,999);
+            Product product = new Product
+            {
+                Model=$"Model Edit{random}",
+                Serial=$"Serial Edit{random}",
+                Description=$"Description Edit{random}",
+                Status=$"Status Edit{random}",
+                Rma_Id=random
+            };
+            
+
+            //act
+            adapter.EditProduct(product);
+
+
+        }
 
     }
 }
