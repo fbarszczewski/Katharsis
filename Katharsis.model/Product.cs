@@ -13,6 +13,6 @@ namespace Katharsis.model
         public string Serial { get; set; }
         public string Description { get; set; }
         public string Status { get; set; }
-
+        public int Rma_Id { get; set; }
     }
 }

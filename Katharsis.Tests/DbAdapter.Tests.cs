@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Katharsis.model;
 using Khatarsis.DAL;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -8,14 +9,14 @@ namespace Katharsis.Tests
     [TestClass]
     public class UnitTest1
     {
-
+        DbAdapter adapter =new DbAdapter();
         [TestMethod]
         public void AddNewBalnkRmaAndFillItWithBasicData()
         {
             //Arrange
-            DbAdapter adapter =new DbAdapter();
+            
             //new record
-            int testedRmaId = adapter.CreateNewRmaRecord();
+            int testedRmaId = adapter.WriteNewRmaRecord();
 
             Rma rmaIn = new Rma();
             rmaIn.Id = testedRmaId;
@@ -30,7 +31,7 @@ namespace Katharsis.Tests
             Rma rmaOut;
             //act
             adapter.FillRmaRecord(rmaIn);
-            rmaOut = adapter.GetRmaLog(testedRmaId);
+            rmaOut = adapter.ReadRmaLog(testedRmaId);
 
             //Assert
             Assert.AreEqual(rmaOut.Id,rmaIn.Id,"id");
@@ -46,7 +47,6 @@ namespace Katharsis.Tests
         public void AddNewClient()
         {
             //Arrange
-            DbAdapter adapter =new DbAdapter();
             Client inputClient=new Client();
             inputClient.Comapny= "Test Company";
             inputClient.Phone= "Test Phone";
@@ -55,17 +55,69 @@ namespace Katharsis.Tests
 
             //Act
             //Add client & get its id
-            inputClient.Id = adapter.AddClient(inputClient);
+            inputClient.Id = adapter.WriteClient(inputClient);
             //Retrive client
-            outputClient = adapter.GetClient(inputClient.Id);
+            outputClient = adapter.ReadClient(inputClient.Id);
 
             //Assert
             Assert.AreEqual(inputClient.Id,outputClient.Id," client id");
             Assert.AreEqual(inputClient.Comapny,outputClient.Comapny," client Comapny");
             Assert.AreEqual(inputClient.Phone,outputClient.Phone," client Phone");
             Assert.AreEqual(inputClient.Mail,outputClient.Mail," client Mail");
-
         }
+
+        [TestMethod]
+        public void WriteAndReadProduct()
+        {
+            //Arrange
+
+            int rma_id = new Random().Next(0,999);
+
+            List<Product> products = new List<Product>();
+
+            products.Add(new Product{
+                        Model="Test Model 1",
+                        Serial="Test Serial 1",
+                        Description="Test Description 1",
+                        Status="Test Status 1",
+                        Rma_Id=rma_id
+            }); 
+            
+            products.Add(new Product{
+                        Model="Test Model 2",
+                        Serial="Test Serial 2",
+                        Description="Test Description 2",
+                        Status="Test Status 2",
+                        Rma_Id=rma_id
+            });  
+            
+            List<Product> outputProducts;
+
+            //Act
+
+            //write
+            foreach (var product in products)
+            {
+                adapter.WriteProduct(product);
+            }
+
+            //read
+            outputProducts = adapter.ReadProducts(rma_id);
+
+            //Assert
+            Assert.AreEqual(outputProducts[0].Model, products[0].Model, "Model");
+            Assert.AreEqual(outputProducts[0].Serial, products[0].Serial, "Serial");
+            Assert.AreEqual(outputProducts[0].Description, products[0].Description, "Description");
+            Assert.AreEqual(outputProducts[0].Status, products[0].Status, "Status");
+            Assert.AreEqual(outputProducts[0].Rma_Id, products[0].Rma_Id, "Rma_Id");
+
+            Assert.AreEqual(outputProducts[1].Model, products[1].Model, "Model");
+            Assert.AreEqual(outputProducts[1].Serial, products[1].Serial, "Serial");
+            Assert.AreEqual(outputProducts[1].Description, products[1].Description, "Description");
+            Assert.AreEqual(outputProducts[1].Status, products[1].Status, "Status");
+            Assert.AreEqual(outputProducts[1].Rma_Id, products[1].Rma_Id, "Rma_Id");
+        }
+
 
     }
 }
