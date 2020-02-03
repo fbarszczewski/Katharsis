@@ -11,7 +11,7 @@ namespace Katharsis.Tests
     {
         DbAdapter adapter =new DbAdapter();
         [TestMethod]
-        public void AddRmaFillWithValuesAndCheckValues()
+        public void AddRmaFillWithValues_CheckValues()
         {
             //Arrange
             
@@ -44,7 +44,7 @@ namespace Katharsis.Tests
         }
 
         [TestMethod]
-        public void AddNewClientAndCheckValues()
+        public void AddNewClient_CheckValues()
         {
             //Arrange
             Client inputClient=new Client();
@@ -67,7 +67,7 @@ namespace Katharsis.Tests
         }
 
         [TestMethod]
-        public void WriteAndReadProduct()
+        public void WriteAndReadProduct_CheckValues()
         {
             //Arrange
 
@@ -120,7 +120,7 @@ namespace Katharsis.Tests
 
 
         [TestMethod]
-        public void EditProductAndCheckValues()
+        public void EditProduct_CheckValues()
         {
             //act
             int random=new Random().Next(0,999);
@@ -137,6 +137,39 @@ namespace Katharsis.Tests
             //act
             adapter.EditProduct(product);
 
+
+        }
+
+        [TestMethod]
+        public void WriteAndReadComments_CheckValues()
+        {
+            //Arrange
+            int rma_id = new Random().Next(0,999);
+            List<Comment> comments = new List<Comment>();
+            comments.Add(new Comment{
+                Content = $"Comment Test 1",
+                Rma_Id = rma_id
+            });
+
+            comments.Add(new Comment{
+                Content = $"Comment Test 2",
+                Rma_Id = rma_id
+            });
+
+            List<Comment> commentsOutput;
+
+            //Act
+
+            foreach (Comment comment in comments)
+            {
+                adapter.WriteComment(comment);
+            }
+
+            commentsOutput = adapter.ReadComments(rma_id);
+
+            //Assert
+            Assert.AreEqual(commentsOutput[0].Content, comments[0].Content, "Content 1");
+            Assert.AreEqual(commentsOutput[1].Content, comments[1].Content, "Content 2");
 
         }
 

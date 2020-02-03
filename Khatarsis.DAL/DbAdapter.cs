@@ -208,9 +208,11 @@ namespace Khatarsis.DAL
 
             return products;
         }
-
         
-
+        /// <summary>
+        /// Rewrite all rows in selected product
+        /// </summary>
+        /// <param name="product"></param>
         public void EditProduct(Product product)
         {
             //model,serial,description,status,rma_id 
@@ -245,17 +247,73 @@ namespace Khatarsis.DAL
         }
 
 
-
-        public void WriteComment()
+        public void WriteComment(Comment comment)
         {
+             _connection = new MySqlConnection(_connectionString);
+            _command = new MySqlCommand();
+            _command.Connection = _connection;
+            _command.CommandText = "INSERT INTO comment (content,rma_id) " +
+                              "VALUES (@content,@rma_id);";
 
+            _command.Parameters.AddWithValue("@content",comment.Content);
+            _command.Parameters.AddWithValue("@rma_id",comment.Rma_Id);
+
+            try
+            {
+                _connection.Open();
+                _command.Prepare();
+                _command.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("WriteComment Error\n\n"+e.Message);
+            }
+            finally 
+            { 
+                _connection.Close(); 
+            }
+            
         }
         public void EditComment()
         {
 
         }
 
+        public List<Comment> ReadComments(int rma_id)
+        {
+            
+            _connection = new MySqlConnection(_connectionString);
+            _command = new MySqlCommand();
+            _command.Connection = _connection;
+            _command.CommandText = 
+                $"SELECT id,content,date,rma_id " +
+                $"FROM comment " +
+                $"WHERE rma_id='{rma_id}';";
 
+            List<Comment>comments=new List<Comment>();
+
+            try
+            {
+               _connection.Open();
+               var rdr = _command.ExecuteReader();
+                while(rdr.Read())
+                {
+                    comments.Add(new Comment{
+                        Id = rdr.GetInt32(0),
+                        Content=rdr.GetString(1),
+                        Date=rdr.GetString(2),
+                        Rma_Id=rdr.GetInt32(3)
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("ReadComments Error\n\n"+e.Message);
+            }
+            finally { _connection.Close(); }
+
+            return comments;
+        }
 
 
         /// <summary>
